@@ -1,8 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movieapp/ApiServices/ApiServices.dart';
-import 'package:movieapp/ApiServices/endpoints.dart';
-import 'package:movieapp/layout/cubit/states.dart';
-import 'package:movieapp/models/movie.dart';
+import 'package:movieapp/businessLogic/cubit/states.dart';
+import 'package:movieapp/data/apiservice/diohelper.dart';
+import 'package:movieapp/data/apiservice/endpoints.dart';
+import 'package:movieapp/data/models/NowplayingModel.dart';
+import 'package:movieapp/data/models/TrandingPersonModel.dart';
+import 'package:movieapp/data/models/topRtedModel.dart';
 
 class MovieCubit extends Cubit<MovieStates> {
   MovieCubit() : super(Initstate());
@@ -10,39 +12,34 @@ class MovieCubit extends Cubit<MovieStates> {
   static MovieCubit get(context) => BlocProvider.of(context);
 
   final String apiKey = "9b739e457a86270518ffb851854d6f58";
-  //static String mainUrl = "https://api.themoviedb.org/3";
 
-  // MovieModel? movieModel;
-  List movies = [];
-  getNowplaying() async {
+  late NowPlayingModel nowplayingModel;
+  getNowplaying() {
     emit(NowPlayingLoadingState());
-    print("loading");
+    print("now plaing loading");
     ApiService.getData(
             url: NOWPLAYING,
             queryParmeters: {"api_key": apiKey, "language": "en-US", "page": 1})
         .then((value) {
-      movies = value.data["results"];
-      //print(value.data["results"][0]["adult"]);
-      // print(movies);
-
+      nowplayingModel = NowPlayingModel.fromJson(value.data);
+      print(value.data);
+      print("now plating= ${nowplayingModel.results!.length}");
       emit(NowPlayingSuccessState());
     }).catchError((e) {
-      print(e.toString());
-      NowPlayingErrorState();
+      print("now plaing error${e.toString()}");
+      emit(NowPlayingErrorState());
     });
   }
 
-  List persons = [];
-
-  getTrendingPerson() async {
+  late TrendPersonModel trendPersonModel;
+  getTrendingPerson() {
     emit(GetTrendingPeopleLoadingState());
 
     ApiService.getData(
             url: TrendingPERSON,
             queryParmeters: {"api_key": apiKey, "language": "en-US", "page": 1})
         .then((value) {
-      persons = value.data["results"];
-      print(persons);
+      trendPersonModel = TrendPersonModel.fromJson(value.data);
       emit(GetTrendingPeopleSuccessState());
     }).catchError((e) {
       print(e.toString());
@@ -50,31 +47,19 @@ class MovieCubit extends Cubit<MovieStates> {
     });
   }
 
-
-
- List toprate = [];
-
-  getTopRate() async {
+  late TopRateModel topRateModel;
+  getTopRate() {
     emit(GetTrendingPeopleLoadingState());
 
     ApiService.getData(
             url: TOPRATED,
             queryParmeters: {"api_key": apiKey, "language": "en-US", "page": 1})
         .then((value) {
-      toprate = value.data["results"];
-      print(toprate);
+      topRateModel = TopRateModel.fromJson(value.data);
       emit(GetTrendingPeopleSuccessState());
     }).catchError((e) {
       print(e.toString());
       GetTrendingPeopleErrorState();
     });
   }
-
-
-
-
-
-
-
-
 }

@@ -6,7 +6,7 @@ class MovieModel {
   String? poster;
   double? popularity;
   String? releaseDate;
-  double? rating;
+  dynamic rating;
 
   MovieModel(this.id, this.title, this.overview, this.poster, this.backPoster,
       this.popularity, this.releaseDate, this.rating);

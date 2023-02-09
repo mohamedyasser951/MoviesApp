@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movieapp/ApiServices/ApiServices.dart';
-import 'package:movieapp/layout/cubit/cubit.dart';
-import 'package:movieapp/screen/homeScreen.dart';
+import 'package:movieapp/businessLogic/cubit/cubit.dart';
+import 'package:movieapp/businessLogic/cubit/states.dart';
+import 'package:movieapp/data/apiservice/diohelper.dart';
+import 'package:movieapp/component/block_observer.dart';
+import 'package:movieapp/presentation/screen/homeScreen.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   ApiService.init();
+
+  Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
 }
 
@@ -17,12 +21,23 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create:(context) => MovieCubit()..getNowplaying()..getTrendingPerson()..getTopRate(),)
+        BlocProvider(
+          create: (context) => MovieCubit()
+            // ..getNowplaying()
+            // ..getTrendingPerson()
+            // ..getTopRate(),
+        ),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData.dark(),
-        home: const HomeScreen(),
+      child: BlocConsumer<MovieCubit, MovieStates>(
+        listener: (context, state) {},
+        builder: (context, state) {
+
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData.dark(),
+            home: const HomeScreen(),
+          );
+        },
       ),
     );
   }
