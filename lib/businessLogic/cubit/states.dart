@@ -19,3 +19,13 @@ class GetTopRateErrorState extends MovieStates{}
 class GetTopRateLoadingState extends MovieStates{}
 
 
+//Get Genere
+class GetGenereSuccessState extends MovieStates{}
+class GetGenereErrorState extends MovieStates{}
+class GetGenereLoadingState extends MovieStates{}
+
+
+//Get Movie by GenereId
+class GetMovieByGenereIdSuccessState extends MovieStates{}
+class GetMovieByGenereIdErrorState extends MovieStates{}
+class GetMovieByGenereIdLoadingState extends MovieStates{}

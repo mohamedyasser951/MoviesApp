@@ -4,25 +4,37 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/businessLogic/cubit/cubit.dart';
 import 'package:movieapp/businessLogic/cubit/states.dart';
 import 'package:movieapp/component/styles/style.dart';
+import 'package:movieapp/data/models/genereModel.dart';
 import 'package:movieapp/presentation/widgets/now_playingMovie.dart';
 import 'package:movieapp/presentation/widgets/topPersonRate.dart';
 import 'package:movieapp/presentation/widgets/topRatedMovie.dart';
-import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
       MovieCubit.get(context).getTrendingPerson();
-        MovieCubit.get(context).getNowplaying();
-       MovieCubit.get(context).getTopRate();
+      MovieCubit.get(context).getNowplaying();
+      MovieCubit.get(context).getTopRate();
+      MovieCubit.get(context).getGenre();
       return BlocConsumer<MovieCubit, MovieStates>(
           listener: (context, state) {},
           builder: (context, state) {
             var cubit = MovieCubit.get(context);
-           print(cubit.nowplayingModel.results!.length);
+            List<GenereData> genres = [];
+            print(cubit.genereModel.genres!.length);
 
             return Scaffold(
               backgroundColor: CustomColors.bottomDarkBack,
@@ -52,13 +64,45 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   const NowPlaying(),
                   Container(
-                    height: 200.0,
-                  ),
+                      height: 300.0,
+                      child: DefaultTabController(
+                          length: cubit.genereModel.genres!.length,
+                          child: Scaffold(
+                            backgroundColor: CustomColors.bottomDarkBack,
+                            appBar: PreferredSize(
+                              preferredSize: const Size.fromHeight(50.0),
+                              child: AppBar(
+                                backgroundColor: CustomColors.bottomDarkBack,
+                                bottom: TabBar(
+                                    isScrollable: true,
+                                    indicatorColor: CustomColors.thirdColor,
+                                    tabs: cubit.genereModel.genres!.map((e) {
+                                      return Tab(
+                                        text: e.name,
+                                        icon: Icon(Icons.home),
+                                        child: Text("${e.name}}"),
+                                      );
+                                    }).toList()),
+                              ),
+                            ),
+                            body: TabBarView(
+                              children: [
+                                for (int i = 1; i <= 19; i++)
+                                  Container(
+                                    color: Colors.amber,
+                                   // child: Text("${genres[i-1].id}"),
+                                  )
+                              ],
+                              // children: genres.map((e) {
+                              //   return Container(color: Colors.red,);
+                              // }).toList(),
+                            ),
+                          ))),
                   Text(
                     'Trending Person in this week',
                     style: TextStyle(color: CustomColors.elementBack),
                   ),
-                 PersonsList(),
+                  PersonsList(),
                   Text(
                     'Top Rated Movies',
                     style: TextStyle(color: CustomColors.elementBack),
@@ -82,6 +126,3 @@ class HomeScreen extends StatelessWidget {
     });
   }
 }
-
-
-

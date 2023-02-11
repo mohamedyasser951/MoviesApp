@@ -4,6 +4,7 @@ import 'package:movieapp/data/apiservice/diohelper.dart';
 import 'package:movieapp/data/apiservice/endpoints.dart';
 import 'package:movieapp/data/models/NowplayingModel.dart';
 import 'package:movieapp/data/models/TrandingPersonModel.dart';
+import 'package:movieapp/data/models/genereModel.dart';
 import 'package:movieapp/data/models/topRtedModel.dart';
 
 class MovieCubit extends Cubit<MovieStates> {
@@ -16,7 +17,6 @@ class MovieCubit extends Cubit<MovieStates> {
   late NowPlayingModel nowplayingModel;
   getNowplaying() {
     emit(NowPlayingLoadingState());
-    print("now plaing loading");
     ApiService.getData(
             url: NOWPLAYING,
             queryParmeters: {"api_key": apiKey, "language": "en-US", "page": 1})
@@ -60,6 +60,35 @@ class MovieCubit extends Cubit<MovieStates> {
     }).catchError((e) {
       print(e.toString());
       GetTrendingPeopleErrorState();
+    });
+  }
+
+  late GenereModel genereModel;
+  getGenre() {
+    emit(GetGenereLoadingState());
+    ApiService.getData(
+            url: GENERE,
+            queryParmeters: {"api_key": apiKey, "language": "en-US", "page": 1})
+        .then((value) {
+      genereModel = GenereModel.froJson(value.data);
+      print("get Genre ${genereModel.genres![0].name}");
+      emit(GetGenereSuccessState());
+    }).catchError((e) {
+      print(e.toString());
+      emit(GetGenereErrorState());
+    });
+  }
+
+  getMovieByGenreId({required int movieId}) {
+    emit(GetMovieByGenereIdLoadingState());
+    ApiService.getData(
+            url: " $MOVIEBYGENREID?with_genres=$movieId",
+            queryParmeters: {"api_key": apiKey, "language": "en-US", "page": 1})
+        .then((value) {
+      emit(GetMovieByGenereIdSuccessState());
+    }).catchError((e) {
+      print(e.toString());
+      emit(GetMovieByGenereIdErrorState());
     });
   }
 }
