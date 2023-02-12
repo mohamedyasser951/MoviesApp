@@ -28,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
       MovieCubit.get(context).getTrendingPerson();
       MovieCubit.get(context).getNowplaying();
       MovieCubit.get(context).getTopRate();
-      MovieCubit.get(context).getGenre();
+      // MovieCubit.get(context).getGenre();
       return BlocConsumer<MovieCubit, MovieStates>(
           listener: (context, state) {},
           builder: (context, state) {
@@ -73,30 +73,30 @@ class _HomeScreenState extends State<HomeScreen> {
                               preferredSize: const Size.fromHeight(50.0),
                               child: AppBar(
                                 backgroundColor: CustomColors.bottomDarkBack,
-                                bottom: TabBar(
-                                    isScrollable: true,
-                                    indicatorColor: CustomColors.thirdColor,
-                                    tabs: cubit.genereModel.genres!.map((e) {
-                                      return Tab(
-                                        text: e.name,
-                                        icon: Icon(Icons.home),
-                                        child: Text("${e.name}}"),
-                                      );
-                                    }).toList()),
+                                // bottom: TabBar(
+                                //     isScrollable: true,
+                                //     indicatorColor: CustomColors.thirdColor,
+                                //     tabs: cubit.genereModel.genres!.map((e) {
+                                //       return Tab(
+                                //         text: e.name,
+                                //         icon: const Icon(Icons.home),
+                                //         child: Text("${e.name}}"),
+                                //       );
+                                //     }).toList()),
                               ),
                             ),
-                            body: TabBarView(
-                              children: [
-                                for (int i = 1; i <= 19; i++)
-                                  Container(
-                                    color: Colors.amber,
-                                   // child: Text("${genres[i-1].id}"),
-                                  )
-                              ],
-                              // children: genres.map((e) {
-                              //   return Container(color: Colors.red,);
-                              // }).toList(),
-                            ),
+                            // body: TabBarView(
+                            //   children: [
+                            //     for (int i = 1; i <= 19; i++)
+                            //       Container(
+                            //         color: Colors.amber,
+                            //        // child: Text("${genres[i-1].id}"),
+                            //       )
+                            //   ],
+                            //   // children: genres.map((e) {
+                            //   //   return Container(color: Colors.red,);
+                            //   // }).toList(),
+                            // ),
                           ))),
                   Text(
                     'Trending Person in this week',
