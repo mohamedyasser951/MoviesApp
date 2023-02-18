@@ -4,7 +4,8 @@ import 'package:movieapp/businessLogic/cubit/cubit.dart';
 import 'package:movieapp/businessLogic/cubit/states.dart';
 import 'package:movieapp/data/apiservice/diohelper.dart';
 import 'package:movieapp/component/block_observer.dart';
-import 'package:movieapp/presentation/screen/homeScreen.dart';
+import 'package:movieapp/presentation/screen/home_screen.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => MovieCubit()
-            ..getGenre()
+            //..getGenre()
             // ..getTrendingPerson()
             // ..getTopRate(),
         ),
