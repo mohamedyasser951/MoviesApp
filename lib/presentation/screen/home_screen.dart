@@ -24,9 +24,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
-      MovieCubit.get(context).getTrendingPerson();
-      MovieCubit.get(context).getNowplaying();
-      MovieCubit.get(context).getTopRate();
+      // MovieCubit.get(context).getTrendingPerson();
+      // MovieCubit.get(context).getNowplaying();
+      // MovieCubit.get(context).getTopRate();
       // MovieCubit.get(context).getGenre();
       return BlocConsumer<MovieCubit, MovieStates>(
           listener: (context, state) {},

@@ -29,3 +29,9 @@ class GetGenereLoadingState extends MovieStates{}
 class GetMovieByGenereIdSuccessState extends MovieStates{}
 class GetMovieByGenereIdErrorState extends MovieStates{}
 class GetMovieByGenereIdLoadingState extends MovieStates{}
+
+
+//Get MoviebyId
+class GetMovieByIdSuccessState extends MovieStates{}
+class GetMovieByIdErrorState extends MovieStates{}
+class GetMovieByIdLoadingState extends MovieStates{}

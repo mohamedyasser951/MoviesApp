@@ -4,7 +4,7 @@ import 'package:movieapp/component/styles/style.dart';
 import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';
 
 class DetailsScreen extends StatefulWidget {
- final int movieId;
+  final int movieId;
   const DetailsScreen({super.key, required this.movieId});
 
   @override
@@ -12,12 +12,21 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends State<DetailsScreen> {
+  @override
+  void initState() {
+    MovieCubit.get(context).getMovieDetails(movieId: widget.movieId);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     var cubit = MovieCubit.get(context);
     return Builder(builder: (context) {
-      MovieCubit.get(context).getMovieByGenreId(movieId: 505642);
       return Scaffold(
         backgroundColor: CustomColors.bottomDarkBack,
         body: CustomScrollView(
@@ -27,15 +36,15 @@ class _DetailsScreenState extends State<DetailsScreen> {
               backgroundColor: CustomColors.bottomDarkBack,
               pinned: true,
               flexibleSpace: FlexibleSpaceBar(
-                title: Text(cubit.movieModel!.title!),
+                title: Text(cubit.movieDetailModel.title!,style: const TextStyle(fontSize: 16),),
                 background: Stack(children: [
                   Container(
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       shape: BoxShape.rectangle,
                       image: DecorationImage(
-                          fit: BoxFit.cover,
+                          fit: BoxFit.contain,
                           image: NetworkImage(
-                              "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/220px-Image_created_with_a_mobile_phone.png")),
+                              "https://image.tmdb.org/t/p/w500${cubit.movieDetailModel.poster!}")),
                     ),
                     child: Container(
                       decoration:
@@ -65,7 +74,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        "8.6",
+                        cubit.movieDetailModel.voteAverage!.toString(),
                         maxLines: 2,
                       ),
                       const SizedBox(
@@ -78,7 +87,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         borderColor: Colors.white,
                         spacing: 2,
                         onRatingChanged: (rating) {},
-                        rating: 8,
+                        rating: cubit.movieDetailModel.voteAverage!,
                         size: 15,
                       ),
                     ],
@@ -87,17 +96,57 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 const SizedBox(
                   height: 5.0,
                 ),
-                Padding(
+                const Padding(
                   padding: EdgeInsets.all(10.0),
                   child: Text("Overview"),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: Text(
-                      "Overview 121 0201 215 1 515 10 dnknfladkn anlknvgalknf alnl"),
+                    cubit.movieDetailModel.overview!,
+                    maxLines: 4,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
-                const SizedBox(
-                  height: 100.0,
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: const[
+                      Text(
+                        "BUDGET",
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                      Text(
+                        "DURATION",
+                          style: TextStyle(color: Colors.grey),
+                      ),
+                      Text(
+                        "RELEASE DATE",
+                          style: TextStyle(color: Colors.grey),
+                      ),
+                    ],
+                  ),
+                ),
+                 Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                       cubit.movieDetailModel.budget!.toString() ,
+                        style: TextStyle(color: CustomColors.thirdColor),
+                      ),
+                      Text(
+                        "120 min",
+                        style: TextStyle(color: CustomColors.thirdColor),
+                      ),
+                      Text(
+                        cubit.movieDetailModel.releaseDate!,
+                        style: TextStyle(color: CustomColors.thirdColor),
+                      ),
+                    ],
+                  ),
                 ),
                 const Padding(
                   padding: EdgeInsets.all(10.0),
@@ -153,6 +202,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     },
                   ),
                 )
+           
+           
               ])),
             ),
           ],

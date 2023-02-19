@@ -24,9 +24,9 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => MovieCubit()
-            //..getGenre()
-            // ..getTrendingPerson()
-            // ..getTopRate(),
+            ..getNowplaying()
+            ..getTrendingPerson()
+            ..getTopRate(),
         ),
       ],
       child: BlocConsumer<MovieCubit, MovieStates>(

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/businessLogic/cubit/states.dart';
 import 'package:movieapp/data/apiservice/diohelper.dart';
 import 'package:movieapp/data/apiservice/endpoints.dart';
+import 'package:movieapp/data/apiservice/models/movie_detail_model.dart';
 import 'package:movieapp/data/models/now_playing_model.dart';
 import 'package:movieapp/data/models/tranding_person_model.dart';
 import 'package:movieapp/data/models/genere_model.dart';
@@ -48,7 +49,7 @@ class MovieCubit extends Cubit<MovieStates> {
     });
   }
 
-  TopRateModel? topRateModel;
+  late TopRateModel topRateModel;
   getTopRate() {
     emit(GetTrendingPeopleLoadingState());
 
@@ -91,6 +92,16 @@ class MovieCubit extends Cubit<MovieStates> {
     });
   }
 
-  getMovieDetails(){}
-
+  late MovieDetailModel movieDetailModel;
+  getMovieDetails({required int movieId}) {
+    emit(GetMovieByIdLoadingState());
+    ApiService.getData(url: "/movie/$movieId").then((value) {
+      movieDetailModel = MovieDetailModel.fromjson(value.data);
+      print("get movie by id method${value.data}");
+      emit(GetMovieByIdSuccessState());
+    }).catchError((e) {
+      print(e.toString());
+      emit(GetMovieByIdErrorState());
+    });
+  }
 }
