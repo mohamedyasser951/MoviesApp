@@ -1,5 +1,4 @@
 // ignore_for_file: avoid_print
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/businessLogic/cubit/states.dart';
 import 'package:movieapp/data/apiservice/diohelper.dart';
@@ -19,49 +18,52 @@ class MovieCubit extends Cubit<MovieStates> {
   final String apiKey = "9b739e457a86270518ffb851854d6f58";
 
   late NowPlayingModel nowplayingModel;
-  getNowplaying() {
+  Future<NowPlayingModel> getNowplaying() async {
     emit(NowPlayingLoadingState());
-    ApiService.getData(
+    await ApiService.getData(
       url: NOWPLAYING,
     ).then((value) {
       nowplayingModel = NowPlayingModel.fromJson(value.data);
       print(value.data);
       print("now plating= ${nowplayingModel.results!.length}");
-      emit(NowPlayingSuccessState());
+      emit(NowPlayingSuccessState(model: nowplayingModel));
     }).catchError((e) {
       print("now plaing error${e.toString()}");
       emit(NowPlayingErrorState());
     });
+    return nowplayingModel;
   }
 
   late TrendPersonModel trendPersonModel;
-  getTrendingPerson() {
+  Future<TrendPersonModel> getTrendingPerson() async{
     emit(GetTrendingPeopleLoadingState());
 
-    ApiService.getData(
+   await ApiService.getData(
       url: TrendingPERSON,
     ).then((value) {
       trendPersonModel = TrendPersonModel.fromJson(value.data);
-      emit(GetTrendingPeopleSuccessState());
+      emit(GetTrendingPeopleSuccessState(model: trendPersonModel));
     }).catchError((e) {
       print(e.toString());
       GetTrendingPeopleErrorState();
     });
+    return trendPersonModel;
   }
 
   late TopRateModel topRateModel;
-  getTopRate() {
-    emit(GetTrendingPeopleLoadingState());
+  Future<TopRateModel> getTopRate() async {
+    emit(GetTopRateLoadingState());
 
-    ApiService.getData(
+    await ApiService.getData(
       url: TOPRATED,
     ).then((value) {
       topRateModel = TopRateModel.fromJson(value.data);
-      emit(GetTrendingPeopleSuccessState());
+      emit(GetTopRateSuccessState(model: topRateModel));
     }).catchError((e) {
       print(e.toString());
-      GetTrendingPeopleErrorState();
+      GetTopRateErrorState();
     });
+    return topRateModel;
   }
 
   GenereModel? genereModel;

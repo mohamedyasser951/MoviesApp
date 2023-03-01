@@ -6,7 +6,7 @@ import 'package:movieapp/businessLogic/cubit/states.dart';
 import 'package:movieapp/component/styles/style.dart';
 import 'package:movieapp/presentation/widgets/now_playingMovie.dart';
 import 'package:movieapp/presentation/widgets/top_person_rate.dart';
-import 'package:movieapp/presentation/widgets/topRatedMovie.dart';
+import 'package:movieapp/presentation/widgets/top_rated_movie_builder.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -31,9 +31,6 @@ class _HomeScreenState extends State<HomeScreen> {
       return BlocConsumer<MovieCubit, MovieStates>(
           listener: (context, state) {},
           builder: (context, state) {
-            var cubit = MovieCubit.get(context);
-            //  print(cubit.genereModel!.genres!.length);
-
             return Scaffold(
               backgroundColor: CustomColors.bottomDarkBack,
               appBar: AppBar(
@@ -63,39 +60,29 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: ListView(
                   children: [
                     const NowPlaying(),
+                   const  SizedBox(height: 20.0,),
                     SizedBox(
-                        height: 300.0,
-                        child: Scaffold(
-                          backgroundColor: CustomColors.bottomDarkBack,
-                          appBar: PreferredSize(
-                            preferredSize: const Size.fromHeight(50.0),
-                            child: AppBar(
-                              backgroundColor: CustomColors.bottomDarkBack,
-                              // bottom: TabBar(
-                              //     isScrollable: true,
-                              //     indicatorColor: CustomColors.thirdColor,
-                              //     tabs: cubit.genereModel.genres!.map((e) {
-                              //       return Tab(
-                              //         text: e.name,
-                              //         icon: const Icon(Icons.home),
-                              //         child: Text("${e.name}}"),
-                              //       );
-                              //     }).toList()),
+                      height: 45,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 6,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            margin:const EdgeInsets.only(right: 10.0),
+                            padding:const EdgeInsets.all(8),
+                            width: 100,
+                            decoration: BoxDecoration(
+                              color: Colors.white54,
+                              borderRadius: BorderRadius.circular(20),
                             ),
-                          ),
-                          // body: TabBarView(
-                          //   children: [
-                          //     for (int i = 1; i <= 19; i++)
-                          //       Container(
-                          //         color: Colors.amber,
-                          //        // child: Text("${genres[i-1].id}"),
-                          //       )
-                          //   ],
-                          //   // children: genres.map((e) {
-                          //   //   return Container(color: Colors.red,);
-                          //   // }).toList(),
-                          // ),
-                        )),
+                            child: const Center(child:  Text("Drama")),
+                          );
+                        },
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 300.0,
+                    ),
                     Text(
                       'Trending Person on this week',
                       style: TextStyle(
@@ -105,26 +92,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 6.0,
                     ),
                     const PersonsList(),
-                    Text(
-                      'Top Rated Movies',
-                      style: TextStyle(
-                          color: CustomColors.elementBack, fontSize: 16.0),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 6.0),
+                      child: Text(
+                        'Top Rated Movies',
+                        style: TextStyle(
+                            color: CustomColors.elementBack, fontSize: 16.0),
+                      ),
                     ),
                     const SizedBox(
                       height: 6.0,
                     ),
-                    SizedBox(
-                      height: 300,
-                      child: ListView.builder(
-                        itemCount: cubit.topRateModel!.results!.length,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return TopRateWidget(
-                            index: index,
-                          );
-                        },
-                      ),
-                    ),
+                    const TopRatedMovieBuilder(),
                   ],
                 ),
               ),

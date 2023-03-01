@@ -1,7 +1,7 @@
 class MovieModel {
   bool? adult;
   String? backdropPath;
-  Null? belongsToCollection;
+ dynamic belongsToCollection;
   int? budget;
   List<Genres>? genres;
   String? homepage;
@@ -11,7 +11,7 @@ class MovieModel {
   String? originalTitle;
   String? overview;
   double? popularity;
-  Null? posterPath;
+  dynamic posterPath;
   List<ProductionCompanies>? productionCompanies;
   List<ProductionCountries>? productionCountries;
   String? releaseDate;
@@ -112,12 +112,7 @@ class Genres {
     name = json['name'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    return data;
-  }
+
 }
 
 class ProductionCompanies {
@@ -135,14 +130,7 @@ class ProductionCompanies {
     originCountry = json['origin_country'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['logo_path'] = this.logoPath;
-    data['name'] = this.name;
-    data['origin_country'] = this.originCountry;
-    return data;
-  }
+
 }
 
 class ProductionCountries {
@@ -156,12 +144,7 @@ class ProductionCountries {
     name = json['name'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['iso_3166_1'] = this.iso31661;
-    data['name'] = this.name;
-    return data;
-  }
+
 }
 
 class SpokenLanguages {

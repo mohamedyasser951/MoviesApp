@@ -6,7 +6,6 @@ import 'package:movieapp/data/apiservice/diohelper.dart';
 import 'package:movieapp/component/block_observer.dart';
 import 'package:movieapp/presentation/screen/home_screen.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   ApiService.init();
@@ -22,17 +21,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => MovieCubit()
-            ..getNowplaying()
-            ..getTrendingPerson()
-            ..getTopRate(),
-        ),
+        BlocProvider(create: (context) => MovieCubit()),
       ],
       child: BlocConsumer<MovieCubit, MovieStates>(
         listener: (context, state) {},
         builder: (context, state) {
-
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: ThemeData.dark(),
