@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:movieapp/businessLogic/cubit/cubit.dart';
 import 'package:movieapp/component/styles/style.dart';
 import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';
@@ -36,13 +37,16 @@ class _DetailsScreenState extends State<DetailsScreen> {
               backgroundColor: CustomColors.bottomDarkBack,
               pinned: true,
               flexibleSpace: FlexibleSpaceBar(
-                title: Text(cubit.movieDetailModel.title!,style: const TextStyle(fontSize: 16),),
+                title: Text(
+                  cubit.movieDetailModel.title!,
+                  style: const TextStyle(fontSize: 12),
+                ),
                 background: Stack(children: [
                   Container(
                     decoration: BoxDecoration(
                       shape: BoxShape.rectangle,
                       image: DecorationImage(
-                          fit: BoxFit.contain,
+                          fit: BoxFit.cover,
                           image: NetworkImage(
                               "https://image.tmdb.org/t/p/w500${cubit.movieDetailModel.poster!}")),
                     ),
@@ -61,6 +65,18 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           Colors.black.withOpacity(0.0),
                         ])),
                   )
+                   ,Positioned(
+                          bottom: 0,
+                          top: 0,
+                          right: 0,
+                          left: 0,
+                          child: Icon(
+                            FontAwesomeIcons.circlePlay,
+                            size: 40.0,
+                            color: CustomColors.secondaryColor,
+                          )),
+                          
+                  
                 ]),
               ),
             ),
@@ -112,29 +128,29 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   padding: const EdgeInsets.all(10.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: const[
+                    children: const [
                       Text(
                         "BUDGET",
                         style: TextStyle(color: Colors.grey),
                       ),
                       Text(
                         "DURATION",
-                          style: TextStyle(color: Colors.grey),
+                        style: TextStyle(color: Colors.grey),
                       ),
                       Text(
                         "RELEASE DATE",
-                          style: TextStyle(color: Colors.grey),
+                        style: TextStyle(color: Colors.grey),
                       ),
                     ],
                   ),
                 ),
-                 Padding(
+                Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Text(
-                       cubit.movieDetailModel.budget!.toString() ,
+                        cubit.movieDetailModel.budget!.toString(),
                         style: TextStyle(color: CustomColors.thirdColor),
                       ),
                       Text(
@@ -202,8 +218,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     },
                   ),
                 )
-           
-           
               ])),
             ),
           ],

@@ -4,6 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/businessLogic/cubit/cubit.dart';
 import 'package:movieapp/businessLogic/cubit/states.dart';
 import 'package:movieapp/component/styles/style.dart';
+import 'package:movieapp/presentation/widgets/genre_movies_builder.dart';
+import 'package:movieapp/presentation/widgets/horizontal_builder.dart';
+import 'package:movieapp/presentation/widgets/horizontal_genre.dart';
+import 'package:movieapp/presentation/widgets/movie_item.dart';
 import 'package:movieapp/presentation/widgets/now_playingMovie.dart';
 import 'package:movieapp/presentation/widgets/top_person_rate.dart';
 import 'package:movieapp/presentation/widgets/top_rated_movie_builder.dart';
@@ -27,10 +31,11 @@ class _HomeScreenState extends State<HomeScreen> {
       // MovieCubit.get(context).getTrendingPerson();
       // MovieCubit.get(context).getNowplaying();
       // MovieCubit.get(context).getTopRate();
-      // MovieCubit.get(context).getGenre();
+      MovieCubit.get(context).getMovieByGenreId();
       return BlocConsumer<MovieCubit, MovieStates>(
           listener: (context, state) {},
           builder: (context, state) {
+            var cubit = MovieCubit.get(context);
             return Scaffold(
               backgroundColor: CustomColors.bottomDarkBack,
               appBar: AppBar(
@@ -57,54 +62,42 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               body: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: ListView(
-                  children: [
-                    const NowPlaying(),
-                   const  SizedBox(height: 20.0,),
-                    SizedBox(
-                      height: 45,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 6,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            margin:const EdgeInsets.only(right: 10.0),
-                            padding:const EdgeInsets.all(8),
-                            width: 100,
-                            decoration: BoxDecoration(
-                              color: Colors.white54,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: const Center(child:  Text("Drama")),
-                          );
-                        },
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const NowPlaying(),
+                      const SizedBox(
+                        height: 20.0,
                       ),
-                    ),
-                    const SizedBox(
-                      height: 300.0,
-                    ),
-                    Text(
-                      'Trending Person on this week',
-                      style: TextStyle(
-                          color: CustomColors.elementBack, fontSize: 16.0),
-                    ),
-                    const SizedBox(
-                      height: 6.0,
-                    ),
-                    const PersonsList(),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 6.0),
-                      child: Text(
-                        'Top Rated Movies',
+                      const HorizontalGenre(),
+                      const SizedBox(
+                        height: 20.0,
+                      ),
+                      const GenreMoviesBuilder(),
+                      Text(
+                        'Trending Person on this week',
                         style: TextStyle(
                             color: CustomColors.elementBack, fontSize: 16.0),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 6.0,
-                    ),
-                    const TopRatedMovieBuilder(),
-                  ],
+                      const SizedBox(
+                        height: 6.0,
+                      ),
+                      const PersonsList(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 6.0),
+                        child: Text(
+                          'Top Rated Movies',
+                          style: TextStyle(
+                              color: CustomColors.elementBack, fontSize: 16.0),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 6.0,
+                      ),
+                      const TopRatedMovieBuilder(),
+                    ],
+                  ),
                 ),
               ),
             );

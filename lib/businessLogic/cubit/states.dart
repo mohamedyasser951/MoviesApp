@@ -1,3 +1,5 @@
+import 'package:movieapp/data/models/movie.dart';
+import 'package:movieapp/data/models/movie2.dart';
 import 'package:movieapp/data/models/now_playing_model.dart';
 import 'package:movieapp/data/models/top_rated_model.dart';
 import 'package:movieapp/data/models/tranding_person_model.dart';
@@ -45,7 +47,10 @@ class GetGenereErrorState extends MovieStates {}
 class GetGenereLoadingState extends MovieStates {}
 
 //Get Movie by GenereId
-class GetMovieByGenereIdSuccessState extends MovieStates {}
+class GetMovieByGenereIdSuccessState extends MovieStates {
+  final List<Results1> model;
+  GetMovieByGenereIdSuccessState({required this.model});
+}
 
 class GetMovieByGenereIdErrorState extends MovieStates {}
 

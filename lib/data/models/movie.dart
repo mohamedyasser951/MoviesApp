@@ -10,7 +10,7 @@ class MovieModel {
   String? originalLanguage;
   String? originalTitle;
   String? overview;
-  double? popularity;
+  dynamic popularity;
   dynamic posterPath;
   List<ProductionCompanies>? productionCompanies;
   List<ProductionCountries>? productionCountries;
@@ -22,7 +22,7 @@ class MovieModel {
   String? tagline;
   String? title;
   bool? video;
-  double? voteAverage;
+  dynamic voteAverage;
   int? voteCount;
 
   MovieModel(

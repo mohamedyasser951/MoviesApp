@@ -4,10 +4,10 @@ import 'package:movieapp/businessLogic/cubit/states.dart';
 import 'package:movieapp/data/apiservice/diohelper.dart';
 import 'package:movieapp/data/apiservice/endpoints.dart';
 import 'package:movieapp/data/apiservice/models/movie_detail_model.dart';
+import 'package:movieapp/data/models/movie2.dart';
 import 'package:movieapp/data/models/now_playing_model.dart';
 import 'package:movieapp/data/models/tranding_person_model.dart';
 import 'package:movieapp/data/models/genere_model.dart';
-import 'package:movieapp/data/models/movie.dart';
 import 'package:movieapp/data/models/top_rated_model.dart';
 
 class MovieCubit extends Cubit<MovieStates> {
@@ -24,8 +24,8 @@ class MovieCubit extends Cubit<MovieStates> {
       url: NOWPLAYING,
     ).then((value) {
       nowplayingModel = NowPlayingModel.fromJson(value.data);
-      print(value.data);
-      print("now plating= ${nowplayingModel.results!.length}");
+      // print(value.data);
+      // print("now plating= ${nowplayingModel.results!.length}");
       emit(NowPlayingSuccessState(model: nowplayingModel));
     }).catchError((e) {
       print("now plaing error${e.toString()}");
@@ -35,10 +35,10 @@ class MovieCubit extends Cubit<MovieStates> {
   }
 
   late TrendPersonModel trendPersonModel;
-  Future<TrendPersonModel> getTrendingPerson() async{
+  Future<TrendPersonModel> getTrendingPerson() async {
     emit(GetTrendingPeopleLoadingState());
 
-   await ApiService.getData(
+    await ApiService.getData(
       url: TrendingPERSON,
     ).then((value) {
       trendPersonModel = TrendPersonModel.fromJson(value.data);
@@ -66,13 +66,16 @@ class MovieCubit extends Cubit<MovieStates> {
     return topRateModel;
   }
 
-  GenereModel? genereModel;
-  getGenre() {
+  late GenreModel genereModel;
+  getGenre() async {
     emit(GetGenereLoadingState());
-    ApiService.getData(
+    await ApiService.getData(
       url: GENERE,
     ).then((value) {
-      genereModel = GenereModel.froJson(value.data);
+      print(value.data);
+
+      genereModel = GenreModel.fromJson(value.data);
+
       emit(GetGenereSuccessState());
     }).catchError((e) {
       print(e.toString());
@@ -80,14 +83,20 @@ class MovieCubit extends Cubit<MovieStates> {
     });
   }
 
-  MovieModel? movieModel;
-  getMovieByGenreId({required int movieId}) {
+  List<Results1> moviedata = [];
+  getMovieByGenreId({int movieId = 12}) {
     emit(GetMovieByGenereIdLoadingState());
     ApiService.getData(
-      url: " $MOVIEBYGENREID?with_genres=$movieId",
+      url: "$MOVIEBYGENREID?with_genres=$movieId",
     ).then((value) {
-      movieModel = MovieModel.fromJson(value.data);
-      emit(GetMovieByGenereIdSuccessState());
+      value.data["results"].forEach((e) {
+        print("one item $e");
+        moviedata.add(Results1.fromJson(e));
+      });
+
+      print("get movie by genre id ${moviedata.length}");
+
+      emit(GetMovieByGenereIdSuccessState(model: moviedata));
     }).catchError((e) {
       print(e.toString());
       emit(GetMovieByGenereIdErrorState());

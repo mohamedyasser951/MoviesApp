@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => MovieCubit()),
+        BlocProvider(create: (context) => MovieCubit()..getGenre()),
       ],
       child: BlocConsumer<MovieCubit, MovieStates>(
         listener: (context, state) {},

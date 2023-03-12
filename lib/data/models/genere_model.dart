@@ -1,22 +1,29 @@
-class GenereModel {
-  List<GenereData>? genres;
+class GenreModel {
+  List<Genres>? genres;
 
-  GenereModel.froJson(Map<String, dynamic> json) {
-    genres = <GenereData>[];
-    json["genres"].forEach((element) {
-      genres!.add(GenereData.frmJson(element));
-    });
+  GenreModel({this.genres});
+
+  GenreModel.fromJson(Map<String, dynamic> json) {
+    if (json['genres'] != null) {
+      genres = <Genres>[];
+      json['genres'].forEach((v) {
+        genres!.add( Genres.fromJson(v));
+      });
+    }
   }
+
 }
 
-class GenereData {
+class Genres {
   int? id;
   String? name;
 
-  GenereData.frmJson(Map<String, dynamic> json) {
-    if (json["genres"] != null) {
-      id = json["id"];
-      name = json["name"];
-    }
+  Genres({this.id, this.name});
+
+  Genres.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
   }
+
+
 }
