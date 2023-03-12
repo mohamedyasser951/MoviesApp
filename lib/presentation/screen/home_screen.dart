@@ -1,13 +1,11 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movieapp/businessLogic/cubit/cubit.dart';
-import 'package:movieapp/businessLogic/cubit/states.dart';
+import 'package:movieapp/businessLogic/HomeCubit/home_cubit.dart';
+import 'package:movieapp/businessLogic/HomeCubit/home_states.dart';
 import 'package:movieapp/component/styles/style.dart';
 import 'package:movieapp/presentation/widgets/genre_movies_builder.dart';
-import 'package:movieapp/presentation/widgets/horizontal_builder.dart';
 import 'package:movieapp/presentation/widgets/horizontal_genre.dart';
-import 'package:movieapp/presentation/widgets/movie_item.dart';
 import 'package:movieapp/presentation/widgets/now_playingMovie.dart';
 import 'package:movieapp/presentation/widgets/top_person_rate.dart';
 import 'package:movieapp/presentation/widgets/top_rated_movie_builder.dart';
@@ -28,14 +26,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
-      // MovieCubit.get(context).getTrendingPerson();
-      // MovieCubit.get(context).getNowplaying();
-      // MovieCubit.get(context).getTopRate();
       MovieCubit.get(context).getMovieByGenreId();
+
       return BlocConsumer<MovieCubit, MovieStates>(
           listener: (context, state) {},
           builder: (context, state) {
-            var cubit = MovieCubit.get(context);
             return Scaffold(
               backgroundColor: CustomColors.bottomDarkBack,
               appBar: AppBar(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movieapp/businessLogic/cubit/cubit.dart';
+import 'package:movieapp/businessLogic/HomeCubit/home_cubit.dart';
 import 'package:movieapp/component/styles/style.dart';
 import 'package:movieapp/data/models/top_rated_model.dart';
 import 'package:movieapp/presentation/screen/details_screen.dart';

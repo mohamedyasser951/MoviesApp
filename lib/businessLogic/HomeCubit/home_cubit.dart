@@ -1,10 +1,11 @@
 // ignore_for_file: avoid_print
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movieapp/businessLogic/cubit/states.dart';
+import 'package:movieapp/businessLogic/HomeCubit/home_states.dart';
 import 'package:movieapp/data/apiservice/diohelper.dart';
 import 'package:movieapp/data/apiservice/endpoints.dart';
-import 'package:movieapp/data/apiservice/models/movie_detail_model.dart';
+import 'package:movieapp/data/models/casts_model.dart';
 import 'package:movieapp/data/models/movie2.dart';
+import 'package:movieapp/data/models/movie_detail_model.dart';
 import 'package:movieapp/data/models/now_playing_model.dart';
 import 'package:movieapp/data/models/tranding_person_model.dart';
 import 'package:movieapp/data/models/genere_model.dart';
@@ -66,7 +67,7 @@ class MovieCubit extends Cubit<MovieStates> {
     return topRateModel;
   }
 
-  late GenreModel genereModel;
+    GenreModel? genereModel;
   getGenre() async {
     emit(GetGenereLoadingState());
     await ApiService.getData(
@@ -76,7 +77,7 @@ class MovieCubit extends Cubit<MovieStates> {
 
       genereModel = GenreModel.fromJson(value.data);
 
-      emit(GetGenereSuccessState());
+      emit(GetGenereSuccessState(model:genereModel!));
     }).catchError((e) {
       print(e.toString());
       emit(GetGenereErrorState());
@@ -103,16 +104,7 @@ class MovieCubit extends Cubit<MovieStates> {
     });
   }
 
-  late MovieDetailModel movieDetailModel;
-  getMovieDetails({required int movieId}) {
-    emit(GetMovieByIdLoadingState());
-    ApiService.getData(url: "/movie/$movieId").then((value) {
-      movieDetailModel = MovieDetailModel.fromjson(value.data);
-      print("get movie by id method${value.data}");
-      emit(GetMovieByIdSuccessState());
-    }).catchError((e) {
-      print(e.toString());
-      emit(GetMovieByIdErrorState());
-    });
-  }
+ 
+
+
 }

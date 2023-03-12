@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movieapp/businessLogic/cubit/cubit.dart';
 import 'package:movieapp/component/styles/style.dart';
-import 'package:movieapp/data/models/movie.dart';
 import 'package:movieapp/data/models/movie2.dart';
 import 'package:movieapp/presentation/screen/details_screen.dart';
 import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';

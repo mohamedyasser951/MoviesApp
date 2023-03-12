@@ -1,4 +1,4 @@
-import 'package:movieapp/data/models/movie.dart';
+import 'package:movieapp/data/models/genere_model.dart';
 import 'package:movieapp/data/models/movie2.dart';
 import 'package:movieapp/data/models/now_playing_model.dart';
 import 'package:movieapp/data/models/top_rated_model.dart';
@@ -40,7 +40,10 @@ class GetTopRateErrorState extends MovieStates {}
 class GetTopRateLoadingState extends MovieStates {}
 
 //Get Genere
-class GetGenereSuccessState extends MovieStates {}
+class GetGenereSuccessState extends MovieStates {
+  final GenreModel model;
+  GetGenereSuccessState({required this.model});
+}
 
 class GetGenereErrorState extends MovieStates {}
 
@@ -56,9 +59,3 @@ class GetMovieByGenereIdErrorState extends MovieStates {}
 
 class GetMovieByGenereIdLoadingState extends MovieStates {}
 
-//Get MoviebyId
-class GetMovieByIdSuccessState extends MovieStates {}
-
-class GetMovieByIdErrorState extends MovieStates {}
-
-class GetMovieByIdLoadingState extends MovieStates {}

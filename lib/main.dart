@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movieapp/businessLogic/cubit/cubit.dart';
-import 'package:movieapp/businessLogic/cubit/states.dart';
+import 'package:movieapp/businessLogic/HomeCubit/home_cubit.dart';
+import 'package:movieapp/businessLogic/HomeCubit/home_states.dart';
 import 'package:movieapp/data/apiservice/diohelper.dart';
 import 'package:movieapp/component/block_observer.dart';
 import 'package:movieapp/presentation/screen/home_screen.dart';
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => MovieCubit()..getGenre()),
+        BlocProvider(create: (context) => MovieCubit()),
       ],
       child: BlocConsumer<MovieCubit, MovieStates>(
         listener: (context, state) {},

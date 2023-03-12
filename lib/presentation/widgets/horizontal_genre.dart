@@ -1,9 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movieapp/businessLogic/cubit/cubit.dart';
-import 'package:movieapp/businessLogic/cubit/states.dart';
+import 'package:movieapp/businessLogic/HomeCubit/home_cubit.dart';
+import 'package:movieapp/businessLogic/HomeCubit/home_states.dart';
 import 'package:movieapp/component/styles/style.dart';
 
 class HorizontalGenre extends StatelessWidget {
@@ -11,6 +11,8 @@ class HorizontalGenre extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MovieCubit.get(context).getGenre();
+
     var cubit = MovieCubit.get(context);
     return BlocBuilder<MovieCubit, MovieStates>(
       builder: (context, state) {
@@ -20,20 +22,19 @@ class HorizontalGenre extends StatelessWidget {
           );
         } else if (state is GetGenereErrorState) {
           return const Center(
-            child: Text("Connection state none"),
+            child: Text("Something Wrong"),
           );
-        }
-         else {
+        } else if (state is GetGenereSuccessState ) {
           return SizedBox(
             height: 45,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: cubit.genereModel.genres!.length,
+              itemCount: cubit.genereModel!.genres!.length,
               itemBuilder: (context, index) {
                 return InkWell(
                   onTap: () {
                     cubit.getMovieByGenreId(
-                        movieId: cubit.genereModel.genres![index].id!);
+                        movieId: cubit.genereModel!.genres![index].id!);
                   },
                   child: Container(
                     margin: const EdgeInsets.only(right: 10.0),
@@ -44,12 +45,14 @@ class HorizontalGenre extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Center(
-                        child: Text(cubit.genereModel.genres![index].name!)),
+                        child: Text(cubit.genereModel!.genres![index].name!)),
                   ),
                 );
               },
             ),
           );
+        } else {
+          return Container(color: Colors.amber,);
         }
       },
     );

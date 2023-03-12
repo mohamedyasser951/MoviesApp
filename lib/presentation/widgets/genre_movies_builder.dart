@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movieapp/businessLogic/cubit/cubit.dart';
-import 'package:movieapp/businessLogic/cubit/states.dart';
+import 'package:movieapp/businessLogic/HomeCubit/home_cubit.dart';
+import 'package:movieapp/businessLogic/HomeCubit/home_states.dart';
 import 'package:movieapp/presentation/widgets/movie_item.dart';
 
 class GenreMoviesBuilder extends StatelessWidget {
