@@ -1,17 +1,17 @@
-class TopRateModel {
+class MainModel {
   int? page;
   List<Results>? results;
   int? totalResults;
   int? totalPages;
 
-  TopRateModel({this.page, this.results, this.totalResults, this.totalPages});
+  MainModel({this.page, this.results, this.totalResults, this.totalPages});
 
-  TopRateModel.fromJson(Map<String, dynamic> json) {
+  MainModel.fromJson(Map<String, dynamic> json) {
     page = json['page'];
     if (json['results'] != null) {
       results = <Results>[];
       json['results'].forEach((v) {
-        results!.add( Results.fromJson(v));
+        results!.add(Results.fromJson(v));
       });
     }
     totalResults = json['total_results'];

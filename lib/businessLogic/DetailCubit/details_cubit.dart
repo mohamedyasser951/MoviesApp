@@ -3,7 +3,7 @@ import 'package:movieapp/businessLogic/DetailCubit/details_states.dart';
 import 'package:movieapp/data/apiservice/diohelper.dart';
 import 'package:movieapp/data/models/casts_model.dart';
 import 'package:movieapp/data/models/movie_detail_model.dart';
-import 'package:movieapp/data/models/top_rated_model.dart';
+import 'package:movieapp/data/models/main_model.dart';
 
 class DetailCubit extends Cubit<DetailStates> {
   DetailCubit() : super(IntialDetailState());
@@ -11,14 +11,14 @@ class DetailCubit extends Cubit<DetailStates> {
   static DetailCubit get(context) => BlocProvider.of(context);
 
   late MovieDetailModel movieDetailModel;
-  getMovieDetails({required int movieId}) {
+  getMovieDetails({required int id}) {
     emit(GetMovieByIdLoadingState());
-    ApiService.getData(url: "/movie/$movieId").then((value) async {
+    ApiService.getData(url: "/movie/$id").then((value) async {
       movieDetailModel = MovieDetailModel.fromjson(value.data);
-      print("get movie by id method${value.data}");
-      await getYoutubeId(movieId: movieId);
-      await getSimilarMovies(id: movieId);
-      await getMovieCasts(id: movieId);
+      movieDetailModel.youtubeUrl = await getYoutubeId(id: id);
+      movieDetailModel.similarMovies = await getSimilarMovies(id: id);
+      movieDetailModel.castModel = await getMovieCasts(id: id);
+
       emit(GetMovieByIdSuccessState());
     }).catchError((e) {
       print(e.toString());
@@ -26,39 +26,33 @@ class DetailCubit extends Cubit<DetailStates> {
     });
   }
 
-  String? youtubeUrl;
-  Future<String> getYoutubeId({required int movieId}) async {
-    await ApiService.getData(url: "/movie/$movieId/videos").then((value) {
-      youtubeUrl = value.data["results"][0]["key"];
-    }).catchError((e) {
-      print(e.toString());
-    });
-    print(youtubeUrl);
-
-    return youtubeUrl!;
+  Future<String> getYoutubeId({required int id}) async {
+    try {
+      var response = await ApiService.getData(url: "/movie/$id/videos");
+      return response.data["results"][0]["key"];
+    } catch (error, stacktrace) {
+      throw Exception(
+          'Exception accoured: $error with stacktrace: $stacktrace');
+    }
   }
 
-  TopRateModel? similarMovieModel;
-  getSimilarMovies({required int id}) async {
-    await ApiService.getData(url: "/movie/$id/similar").then((value) {
-      similarMovieModel = TopRateModel.fromJson(value.data);
-      print("GetSimilarMovie ${value.data}");
-    }).catchError((e) {
-      print(e.toString());
-    });
-    return similarMovieModel;
+  Future<MainModel> getSimilarMovies({required int id}) async {
+    try {
+      var response = await ApiService.getData(url: "/movie/$id/similar");
+      return MainModel.fromJson(response.data);
+    } catch (error, stacktrace) {
+      throw Exception(
+          'Exception accoured: $error with stacktrace: $stacktrace');
+    }
   }
 
-  List<Cast> casts = [];
   getMovieCasts({required int id}) async {
-    await ApiService.getData(url: "/movie/$id/credits").then((value) {
-      value.data['cast'].forEach((v) {
-        casts.add(Cast.fromJson(v));
-      });
-      print("GetMovieCasts ${value.data}");
-    }).catchError((e) {
-      print(e.toString());
-    });
-    return casts;
+    try {
+      var response = await ApiService.getData(url: "/movie/$id/credits");
+      return CastModel.fromJson(response.data);
+    } catch (error, stacktrace) {
+      throw Exception(
+          'Exception accoured: $error with stacktrace: $stacktrace');
+    }
   }
 }

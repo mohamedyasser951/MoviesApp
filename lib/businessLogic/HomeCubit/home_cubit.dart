@@ -3,13 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/businessLogic/HomeCubit/home_states.dart';
 import 'package:movieapp/data/apiservice/diohelper.dart';
 import 'package:movieapp/data/apiservice/endpoints.dart';
-import 'package:movieapp/data/models/casts_model.dart';
+import 'package:movieapp/data/models/main_model.dart';
 import 'package:movieapp/data/models/movie2.dart';
-import 'package:movieapp/data/models/movie_detail_model.dart';
 import 'package:movieapp/data/models/now_playing_model.dart';
 import 'package:movieapp/data/models/tranding_person_model.dart';
 import 'package:movieapp/data/models/genere_model.dart';
-import 'package:movieapp/data/models/top_rated_model.dart';
 
 class MovieCubit extends Cubit<MovieStates> {
   MovieCubit() : super(Initstate());
@@ -51,23 +49,23 @@ class MovieCubit extends Cubit<MovieStates> {
     return trendPersonModel;
   }
 
-  late TopRateModel topRateModel;
-  Future<TopRateModel> getTopRate() async {
+  late MainModel mainModel;
+  Future<MainModel> getTopRate() async {
     emit(GetTopRateLoadingState());
 
     await ApiService.getData(
       url: TOPRATED,
     ).then((value) {
-      topRateModel = TopRateModel.fromJson(value.data);
-      emit(GetTopRateSuccessState(model: topRateModel));
+      mainModel = MainModel.fromJson(value.data);
+      emit(GetTopRateSuccessState(model: mainModel));
     }).catchError((e) {
       print(e.toString());
       GetTopRateErrorState();
     });
-    return topRateModel;
+    return mainModel;
   }
 
-    GenreModel? genereModel;
+  GenreModel? genereModel;
   getGenre() async {
     emit(GetGenereLoadingState());
     await ApiService.getData(
@@ -77,7 +75,7 @@ class MovieCubit extends Cubit<MovieStates> {
 
       genereModel = GenreModel.fromJson(value.data);
 
-      emit(GetGenereSuccessState(model:genereModel!));
+      emit(GetGenereSuccessState(model: genereModel!));
     }).catchError((e) {
       print(e.toString());
       emit(GetGenereErrorState());
@@ -103,8 +101,4 @@ class MovieCubit extends Cubit<MovieStates> {
       emit(GetMovieByGenereIdErrorState());
     });
   }
-
- 
-
-
 }

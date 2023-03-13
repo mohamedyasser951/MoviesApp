@@ -1,7 +1,7 @@
 import 'package:movieapp/data/models/genere_model.dart';
 import 'package:movieapp/data/models/movie2.dart';
 import 'package:movieapp/data/models/now_playing_model.dart';
-import 'package:movieapp/data/models/top_rated_model.dart';
+import 'package:movieapp/data/models/main_model.dart';
 import 'package:movieapp/data/models/tranding_person_model.dart';
 
 abstract class MovieStates {}
@@ -31,7 +31,7 @@ class GetTrendingPeopleLoadingState extends MovieStates {}
 
 //Get TopRate
 class GetTopRateSuccessState extends MovieStates {
-  TopRateModel model;
+  MainModel model;
   GetTopRateSuccessState({required this.model});
 }
 
@@ -58,4 +58,3 @@ class GetMovieByGenereIdSuccessState extends MovieStates {
 class GetMovieByGenereIdErrorState extends MovieStates {}
 
 class GetMovieByGenereIdLoadingState extends MovieStates {}
-

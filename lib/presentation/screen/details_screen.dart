@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:movieapp/businessLogic/DetailCubit/details_cubit.dart';
 import 'package:movieapp/businessLogic/DetailCubit/details_states.dart';
 import 'package:movieapp/component/styles/style.dart';
+import 'package:movieapp/data/models/casts_model.dart';
 import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -14,7 +15,7 @@ class DetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => DetailCubit()..getMovieDetails(movieId: movieId),
+      create: (context) => DetailCubit()..getMovieDetails(id: movieId),
       child: BlocBuilder<DetailCubit, DetailStates>(builder: (context, state) {
         var cubit = BlocProvider.of<DetailCubit>(context);
         if (state is GetMovieByIdLoadingState) {
@@ -117,7 +118,7 @@ class DetailsScreen extends StatelessWidget {
                       padding: EdgeInsets.all(10.0),
                       child: Text("CASTS"),
                     ),
-                    CastsBuilder(cubit: cubit),
+                    CastsBuilder(model: cubit.movieDetailModel.castModel!),
                     const SizedBox(
                       height: 6,
                     ),
@@ -138,7 +139,7 @@ class SimilarMovieBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var model = DetailCubit.get(context).similarMovieModel;
+    var model = DetailCubit.get(context).movieDetailModel.similarMovies;
     return SizedBox(
       height: 300,
       child: ListView.builder(
@@ -266,7 +267,7 @@ class SilverAppBar extends StatelessWidget {
               child: IconButton(
                 onPressed: () async {
                   final youtubeUrl =
-                      'https://www.youtube.com/embed/${cubit.youtubeUrl}';
+                      'https://www.youtube.com/embed/${cubit.movieDetailModel.youtubeUrl}';
                   if (await canLaunchUrl(Uri.parse(youtubeUrl))) {
                     await launchUrl(
                       Uri.parse(youtubeUrl),
@@ -288,17 +289,17 @@ class SilverAppBar extends StatelessWidget {
 class CastsBuilder extends StatelessWidget {
   const CastsBuilder({
     super.key,
-    required this.cubit,
+    required this.model,
   });
 
-  final DetailCubit cubit;
+  final CastModel model;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 130,
       child: ListView.builder(
-        itemCount: cubit.casts.length,
+        itemCount: model.cast!.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return Container(
@@ -313,13 +314,13 @@ class CastsBuilder extends StatelessWidget {
                       image: DecorationImage(
                           fit: BoxFit.cover,
                           image: NetworkImage(
-                              "https://image.tmdb.org/t/p/w500${cubit.casts[index].profilePath}"))),
+                              "https://image.tmdb.org/t/p/w500${model.cast![index].profilePath}"))),
                 ),
                 const SizedBox(
                   height: 10,
                 ),
                 Text(
-                  cubit.casts[index].name!,
+                  model.cast![index].name!,
                   maxLines: 2,
                   style: const TextStyle(
                       fontSize: 12.0,
@@ -331,7 +332,7 @@ class CastsBuilder extends StatelessWidget {
                   height: 3.0,
                 ),
                 Text(
-                  cubit.casts[index].knownForDepartment!,
+                  model.cast![index].knownForDepartment!,
                   maxLines: 2,
                   style: TextStyle(
                       fontSize: 10.0,
