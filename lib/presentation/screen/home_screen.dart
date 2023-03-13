@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/businessLogic/HomeCubit/home_cubit.dart';
 import 'package:movieapp/businessLogic/HomeCubit/home_states.dart';
 import 'package:movieapp/component/styles/style.dart';
+import 'package:movieapp/presentation/screen/search_screen.dart';
 import 'package:movieapp/presentation/widgets/genre_movies_builder.dart';
 import 'package:movieapp/presentation/widgets/horizontal_genre.dart';
 import 'package:movieapp/presentation/widgets/now_playingMovie.dart';
@@ -20,6 +21,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
+    MovieCubit.get(context).getGenre();
+
     super.initState();
   }
 
@@ -47,7 +50,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 actions: [
                   IconButton(
                       onPressed: () async {
-                        MovieCubit.get(context).getNowplaying();
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const SearchScreen(),
+                        ));
                       },
                       icon: const Icon(
                         EvaIcons.searchOutline,

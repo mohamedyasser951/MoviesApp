@@ -71,11 +71,10 @@ class MovieCubit extends Cubit<MovieStates> {
     await ApiService.getData(
       url: GENERE,
     ).then((value) {
-      print(value.data);
+      // print(value.data);
 
       genereModel = GenreModel.fromJson(value.data);
-
-      emit(GetGenereSuccessState(model: genereModel!));
+      emit(GetGenereSuccessState());
     }).catchError((e) {
       print(e.toString());
       emit(GetGenereErrorState());
@@ -89,7 +88,7 @@ class MovieCubit extends Cubit<MovieStates> {
       url: "$MOVIEBYGENREID?with_genres=$movieId",
     ).then((value) {
       value.data["results"].forEach((e) {
-        print("one item $e");
+        // print("one item $e");
         moviedata.add(Results1.fromJson(e));
       });
 

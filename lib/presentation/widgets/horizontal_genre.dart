@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/businessLogic/HomeCubit/home_cubit.dart';
@@ -11,7 +9,6 @@ class HorizontalGenre extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MovieCubit.get(context).getGenre();
 
     var cubit = MovieCubit.get(context);
     return BlocBuilder<MovieCubit, MovieStates>(
@@ -24,7 +21,7 @@ class HorizontalGenre extends StatelessWidget {
           return const Center(
             child: Text("Something Wrong"),
           );
-        } else if (state is GetGenereSuccessState ) {
+        } else if (state is GetGenereSuccessState) {
           return SizedBox(
             height: 45,
             child: ListView.builder(
@@ -51,9 +48,11 @@ class HorizontalGenre extends StatelessWidget {
               },
             ),
           );
-        } else {
-          return Container(color: Colors.amber,);
         }
+        return Container(
+          color: Colors.amber,
+          height: 50,
+        );
       },
     );
   }

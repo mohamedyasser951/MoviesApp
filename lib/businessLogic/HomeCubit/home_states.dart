@@ -41,8 +41,8 @@ class GetTopRateLoadingState extends MovieStates {}
 
 //Get Genere
 class GetGenereSuccessState extends MovieStates {
-  final GenreModel model;
-  GetGenereSuccessState({required this.model});
+  // final GenreModel model;
+  GetGenereSuccessState();
 }
 
 class GetGenereErrorState extends MovieStates {}

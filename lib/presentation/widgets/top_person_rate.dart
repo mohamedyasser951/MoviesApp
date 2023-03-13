@@ -17,8 +17,8 @@ class PersonsList extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         }
-        if(snapshot.connectionState == ConnectionState.done){
-           return SizedBox(
+        if (snapshot.connectionState == ConnectionState.done) {
+          return SizedBox(
             height: 130,
             child: ListView.builder(
               itemCount: snapshot.data!.results!.length,
@@ -29,20 +29,20 @@ class PersonsList extends StatelessWidget {
                   child: Column(
                     children: [
                       Container(
-                        height: 70,
-                        width: 70,
+                        height: 75,
+                        width: 75,
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             image: DecorationImage(
                                 fit: BoxFit.cover,
                                 image: NetworkImage(
-                                    "https://image.tmdb.org/t/p/w500${ snapshot.data!.results![index].image}"))),
+                                    "https://image.tmdb.org/t/p/w500${snapshot.data!.results![index].image}"))),
                       ),
                       const SizedBox(
                         height: 10,
                       ),
                       Text(
-                         snapshot.data!.results![index].name!,
+                        snapshot.data!.results![index].name!,
                         maxLines: 2,
                         style: const TextStyle(
                             fontSize: 12.0,
@@ -54,7 +54,7 @@ class PersonsList extends StatelessWidget {
                         height: 3.0,
                       ),
                       Text(
-                        "Trending for ${ snapshot.data!.results![index].known}",
+                        "Trending for ${snapshot.data!.results![index].known}",
                         maxLines: 2,
                         style: TextStyle(
                             fontSize: 10.0,
@@ -69,20 +69,10 @@ class PersonsList extends StatelessWidget {
             ),
           );
         }
-         return const Center(
+        return const Center(
           child: Text("Something wrong"),
         );
       },
     );
-    // return BlocBuilder<MovieCubit, MovieStates>(
-    //   builder: (context, state) {
-    //     if (state is GetTrendingPeopleLoadingState) {
-    //
-    //     }
-    //     if (state is GetTrendingPeopleSuccessState) {
-    //      
-    //     
-  
-    
   }
 }
