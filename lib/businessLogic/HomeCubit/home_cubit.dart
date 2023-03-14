@@ -12,8 +12,6 @@ class MovieCubit extends Cubit<MovieStates> {
 
   static MovieCubit get(context) => BlocProvider.of(context);
 
-  final String apiKey = "9b739e457a86270518ffb851854d6f58";
-
   late MainModel nowplayingModel;
   Future<MainModel> getNowplaying() async {
     emit(NowPlayingLoadingState());
@@ -21,8 +19,6 @@ class MovieCubit extends Cubit<MovieStates> {
       url: NOWPLAYING,
     ).then((value) {
       nowplayingModel = MainModel.fromJson(value.data);
-      // print(value.data);
-      // print("now plating= ${nowplayingModel.results!.length}");
       emit(NowPlayingSuccessState(model: nowplayingModel));
     }).catchError((e) {
       print("now plaing error${e.toString()}");
@@ -90,13 +86,26 @@ class MovieCubit extends Cubit<MovieStates> {
       value.data["results"].forEach((e) {
         moviedata.add(Results.fromJson(e));
       });
-
-      print("get movie by genre id ${moviedata[0].genreIds}");
-
       emit(GetMovieByGenereIdSuccessState(model: moviedata));
     }).catchError((e) {
       print(e.toString());
       emit(GetMovieByGenereIdErrorState());
     });
   }
+  // late MainModel movieByGenres;
+  // getMovieByGenreId({required int movieId}) async {
+  //   emit(GetMovieByGenereIdLoadingState());
+  //   try {
+  //     var response =
+  //         await ApiService.getData(url: "$MOVIEBYGENREID?with_genres=$movieId");
+  //     movieByGenres = MainModel.fromJson(response.data["results"]);
+  //     print(response.data);
+  //     //  emit(GetMovieByGenereIdSuccessState(model: mainModel));
+
+  //     return mainModel;
+  //   } catch (e) {
+  //     print(e.toString());
+  //     emit(GetMovieByGenereIdErrorState());
+  //   }
+  // }
 }

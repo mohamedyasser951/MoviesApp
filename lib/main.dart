@@ -6,8 +6,6 @@ import 'package:movieapp/businessLogic/SearchCubit/search_cubit.dart';
 import 'package:movieapp/data/apiservice/diohelper.dart';
 import 'package:movieapp/component/block_observer.dart';
 import 'package:movieapp/presentation/screen/home_screen.dart';
-import 'package:movieapp/presentation/screen/search_screen.dart';
-import 'package:movieapp/presentation/widgets/movie_loader.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +23,6 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => MovieCubit()),
-        BlocProvider(create: (context) => SearchCubit()),
       ],
       child: BlocConsumer<MovieCubit, MovieStates>(
         listener: (context, state) {},
@@ -33,7 +30,7 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
               debugShowCheckedModeBanner: false,
               theme: ThemeData.dark(),
-              home: HomeScreen());
+              home: const HomeScreen());
         },
       ),
     );

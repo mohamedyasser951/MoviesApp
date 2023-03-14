@@ -21,7 +21,7 @@ class DetailCubit extends Cubit<DetailStates> {
 
       emit(GetMovieByIdSuccessState());
     }).catchError((e) {
-      print(e.toString());
+      // print(e.toString());
       emit(GetMovieByIdErrorState());
     });
   }

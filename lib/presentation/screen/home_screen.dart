@@ -4,12 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/businessLogic/HomeCubit/home_cubit.dart';
 import 'package:movieapp/businessLogic/HomeCubit/home_states.dart';
 import 'package:movieapp/businessLogic/SearchCubit/search_cubit.dart';
-import 'package:movieapp/businessLogic/SearchCubit/search_state.dart';
 import 'package:movieapp/component/styles/style.dart';
 import 'package:movieapp/presentation/screen/search_screen.dart';
 import 'package:movieapp/presentation/widgets/genre_movies_builder.dart';
 import 'package:movieapp/presentation/widgets/horizontal_genre.dart';
-import 'package:movieapp/presentation/widgets/now_playingMovie.dart';
+import 'package:movieapp/presentation/widgets/now_playing_movie.dart';
 import 'package:movieapp/presentation/widgets/top_person_rate.dart';
 import 'package:movieapp/presentation/widgets/top_rated_movie_builder.dart';
 
@@ -24,14 +23,13 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     MovieCubit.get(context).getGenre();
-     MovieCubit.get(context).getMovieByGenreId(movieId: 10751);
+    MovieCubit.get(context).getMovieByGenreId(movieId: 10751);
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Builder(builder: (context) {
       return BlocConsumer<MovieCubit, MovieStates>(
           listener: (context, state) {},
@@ -53,7 +51,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   IconButton(
                       onPressed: () async {
                         Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const SearchScreen(),
+                          builder: (context) =>  BlocProvider(
+                            create: (context) => SearchCubit(),
+                            child: SearchScreen(),
+                          ),
                         ));
                       },
                       icon: const Icon(

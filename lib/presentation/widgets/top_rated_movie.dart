@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movieapp/businessLogic/HomeCubit/home_cubit.dart';
-import 'package:movieapp/component/styles/style.dart';
 import 'package:movieapp/data/models/main_model.dart';
-import 'package:movieapp/presentation/screen/details_screen.dart';
 import 'package:movieapp/presentation/widgets/movie_item.dart';
 import 'package:movieapp/presentation/widgets/movie_loader.dart';
-import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';
 
 class TopRateWidget extends StatelessWidget {
   final int index;

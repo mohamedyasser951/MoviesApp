@@ -4,8 +4,6 @@ import 'package:movieapp/businessLogic/SearchCubit/search_cubit.dart';
 import 'package:movieapp/businessLogic/SearchCubit/search_state.dart';
 import 'package:movieapp/component/styles/style.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
-import 'package:movieapp/data/models/main_model.dart';
-import 'package:movieapp/presentation/screen/details_screen.dart';
 import 'package:movieapp/presentation/widgets/movie_item.dart';
 import 'package:movieapp/presentation/widgets/movie_loader.dart';
 

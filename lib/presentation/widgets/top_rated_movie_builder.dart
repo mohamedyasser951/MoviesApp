@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:movieapp/presentation/widgets/topRatedMovie.dart';
+import 'package:movieapp/presentation/widgets/top_rated_movie.dart';
 
 class TopRatedMovieBuilder extends StatelessWidget {
   const TopRatedMovieBuilder({super.key});

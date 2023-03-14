@@ -42,12 +42,11 @@ class _HorizontalGenreState extends State<HorizontalGenre> {
                     });
                     cubit.getMovieByGenreId(
                         movieId: cubit.genereModel!.genres![index].id!);
-                    print(cubit.genereModel!.genres![index].id!);
                   },
                   
                   child: Container(
                     margin: const EdgeInsets.only(right: 10.0),
-                    padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 8),
+                    padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 0),
                     // width: 100,
                     decoration: BoxDecoration(
                       color: isSelected == index

@@ -15,7 +15,7 @@ class SearchCubit extends Cubit<SearchStates> {
           url:
               "/search/movie?api_key=9b739e457a86270518ffb851854d6f58&query=$movieName");
 
-      print(response.data);
+      // print(response.data);
 
       MainModel searchModel = MainModel.fromJson(response.data);
       if (searchModel.results!.isEmpty) {

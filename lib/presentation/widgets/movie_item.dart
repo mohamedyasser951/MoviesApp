@@ -68,7 +68,7 @@ class MovieItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    model.voteAverage.toString(),
+                    double.parse((model.voteAverage).toStringAsFixed(1)).toString(),
                     maxLines: 2,
                   ),
                   const SizedBox(

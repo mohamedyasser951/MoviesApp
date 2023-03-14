@@ -41,7 +41,9 @@ class DetailsScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            cubit.movieDetailModel.voteAverage!.toString(),
+                            double.parse((cubit.movieDetailModel.voteAverage!)
+                                    .toStringAsFixed(1))
+                                .toString(),
                             maxLines: 2,
                           ),
                           const SizedBox(
