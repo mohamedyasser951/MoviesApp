@@ -81,6 +81,7 @@ class MovieCubit extends Cubit<MovieStates> {
 
   List<Results> moviedata = [];
   getMovieByGenreId({required int movieId}) async {
+    moviedata = [];
     emit(GetMovieByGenereIdLoadingState());
 
     ApiService.getData(

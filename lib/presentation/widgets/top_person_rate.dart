@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movieapp/businessLogic/HomeCubit/home_cubit.dart';
 import 'package:movieapp/component/styles/style.dart';
+import 'package:movieapp/presentation/widgets/movie_loader.dart';
 
 class PersonsList extends StatelessWidget {
   const PersonsList({
@@ -13,8 +14,8 @@ class PersonsList extends StatelessWidget {
       future: MovieCubit.get(context).getTrendingPerson(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-            child: CircularProgressIndicator(),
+          return  Center(
+            child: circleLoadingWidget(context),
           );
         }
         if (snapshot.connectionState == ConnectionState.done) {

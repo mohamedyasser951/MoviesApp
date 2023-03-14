@@ -47,8 +47,8 @@ class _HorizontalGenreState extends State<HorizontalGenre> {
                   
                   child: Container(
                     margin: const EdgeInsets.only(right: 10.0),
-                    padding: const EdgeInsets.all(8),
-                    width: 100,
+                    padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 8),
+                    // width: 100,
                     decoration: BoxDecoration(
                       color: isSelected == index
                           ? CustomColors.secondaryColor
@@ -56,7 +56,7 @@ class _HorizontalGenreState extends State<HorizontalGenre> {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Center(
-                        child: Text(cubit.genereModel!.genres![index].name!)),
+                        child: Text(cubit.genereModel!.genres![index].name!,maxLines: 1,)),
                   ),
                 );
               },

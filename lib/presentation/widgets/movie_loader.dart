@@ -43,3 +43,45 @@ Widget buildMovielistLoaderWidget(BuildContext context) {
     ),
   );
 }
+
+Widget circleLoadingWidget(BuildContext context) {
+  return Shimmer.fromColors(
+    baseColor: Colors.black87,
+    highlightColor: Colors.white54,
+    enabled: true,
+    child: Container(
+      height: 140.0,
+      padding: const EdgeInsets.only(left: 10.0),
+      child: ListView.builder(
+        shrinkWrap: true,
+          scrollDirection: Axis.horizontal,
+          itemCount: 5,
+          itemBuilder: (_, __) => Padding(
+                padding: const EdgeInsets.only(bottom: 10.0, right: 15.0),
+                child: GestureDetector(
+                  onTap: () {},
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50.0)),
+                        child: SizedBox(
+                          height: 70.0,
+                          width: 70.0,
+                          child: Container(
+                          
+                            decoration:  BoxDecoration(
+                              borderRadius: BorderRadius.circular(50.0),
+                              color: Colors.black12,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )),
+    ),
+  );
+}

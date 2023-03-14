@@ -21,11 +21,10 @@ class MovieItem extends StatelessWidget {
       },
       child: Container(
         height: 300,
-        padding: const EdgeInsets.all(6),
+        padding: const EdgeInsets.all(4),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-        
             CachedNetworkImage(
               imageUrl: "https://image.tmdb.org/t/p/w500${model.posterPath}",
               imageBuilder: (context, imageProvider) => Container(

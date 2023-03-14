@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     MovieCubit.get(context).getGenre();
-     MovieCubit.get(context).getMovieByGenreId(movieId: 0);
+     MovieCubit.get(context).getMovieByGenreId(movieId: 10751);
 
     super.initState();
   }
