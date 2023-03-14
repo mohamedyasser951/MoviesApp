@@ -1,6 +1,3 @@
-import 'package:movieapp/data/models/genere_model.dart';
-import 'package:movieapp/data/models/movie2.dart';
-import 'package:movieapp/data/models/now_playing_model.dart';
 import 'package:movieapp/data/models/main_model.dart';
 import 'package:movieapp/data/models/tranding_person_model.dart';
 
@@ -10,7 +7,7 @@ class Initstate extends MovieStates {}
 
 //Now Playing
 class NowPlayingSuccessState extends MovieStates {
-  final NowPlayingModel model;
+  final MainModel model;
 
   NowPlayingSuccessState({required this.model});
 }
@@ -51,7 +48,7 @@ class GetGenereLoadingState extends MovieStates {}
 
 //Get Movie by GenereId
 class GetMovieByGenereIdSuccessState extends MovieStates {
-  final List<Results1> model;
+  final List<Results> model;
   GetMovieByGenereIdSuccessState({required this.model});
 }
 

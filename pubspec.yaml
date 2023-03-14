@@ -45,6 +45,8 @@ dependencies:
   font_awesome_flutter: ^10.3.0
   smooth_star_rating_null_safety: ^1.0.4+2
   url_launcher: 
+  cached_network_image: ^3.2.3
+  shimmer: ^2.0.0
   
 
 dev_dependencies:

@@ -19,7 +19,7 @@ class PersonsList extends StatelessWidget {
         }
         if (snapshot.connectionState == ConnectionState.done) {
           return SizedBox(
-            height: 130,
+            height: 140,
             child: ListView.builder(
               itemCount: snapshot.data!.results!.length,
               scrollDirection: Axis.horizontal,
@@ -29,8 +29,8 @@ class PersonsList extends StatelessWidget {
                   child: Column(
                     children: [
                       Container(
-                        height: 75,
-                        width: 75,
+                        height: 80,
+                        width: 80,
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             image: DecorationImage(

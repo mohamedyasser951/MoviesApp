@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:movieapp/businessLogic/HomeCubit/home_cubit.dart';
 import 'package:movieapp/component/styles/style.dart';
-import 'package:movieapp/data/models/now_playing_model.dart';
+import 'package:movieapp/data/models/main_model.dart';
 import 'package:movieapp/presentation/screen/details_screen.dart';
+import 'package:movieapp/presentation/widgets/movie_loader.dart';
 import 'package:page_indicator/page_indicator.dart';
 
 class NowPlaying extends StatefulWidget {
@@ -16,7 +17,7 @@ class NowPlaying extends StatefulWidget {
 class _NowPlayingState extends State<NowPlaying> {
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<NowPlayingModel>(
+    return FutureBuilder<MainModel>(
       future: MovieCubit.get(context).getNowplaying(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
@@ -100,8 +101,8 @@ class _NowPlayingState extends State<NowPlaying> {
           );
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-            child: CircularProgressIndicator(),
+          return  Center(
+            child: buildMovielistLoaderWidget(context),
           );
         }
         if (snapshot.connectionState == ConnectionState.none) {

@@ -30,10 +30,10 @@ class Results {
   String? originalLanguage;
   String? title;
   String? backdropPath;
-  double? popularity;
+  dynamic popularity;
   int? voteCount;
   bool? video;
-  double? voteAverage;
+  dynamic voteAverage;
 
   Results(
       {this.posterPath,

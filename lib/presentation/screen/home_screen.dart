@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/businessLogic/HomeCubit/home_cubit.dart';
 import 'package:movieapp/businessLogic/HomeCubit/home_states.dart';
+import 'package:movieapp/businessLogic/SearchCubit/search_cubit.dart';
+import 'package:movieapp/businessLogic/SearchCubit/search_state.dart';
 import 'package:movieapp/component/styles/style.dart';
 import 'package:movieapp/presentation/screen/search_screen.dart';
 import 'package:movieapp/presentation/widgets/genre_movies_builder.dart';
@@ -22,15 +24,15 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     MovieCubit.get(context).getGenre();
+     MovieCubit.get(context).getMovieByGenreId(movieId: 0);
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Builder(builder: (context) {
-      MovieCubit.get(context).getMovieByGenreId();
 
+    return Builder(builder: (context) {
       return BlocConsumer<MovieCubit, MovieStates>(
           listener: (context, state) {},
           builder: (context, state) {

@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/businessLogic/HomeCubit/home_cubit.dart';
 import 'package:movieapp/businessLogic/HomeCubit/home_states.dart';
+import 'package:movieapp/businessLogic/SearchCubit/search_cubit.dart';
 import 'package:movieapp/data/apiservice/diohelper.dart';
 import 'package:movieapp/component/block_observer.dart';
 import 'package:movieapp/presentation/screen/home_screen.dart';
+import 'package:movieapp/presentation/screen/search_screen.dart';
+import 'package:movieapp/presentation/widgets/movie_loader.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,15 +25,15 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => MovieCubit()),
+        BlocProvider(create: (context) => SearchCubit()),
       ],
       child: BlocConsumer<MovieCubit, MovieStates>(
         listener: (context, state) {},
         builder: (context, state) {
           return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData.dark(),
-            home: const HomeScreen(),
-          );
+              debugShowCheckedModeBanner: false,
+              theme: ThemeData.dark(),
+              home: HomeScreen());
         },
       ),
     );

@@ -1,11 +1,12 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movieapp/component/styles/style.dart';
-import 'package:movieapp/data/models/movie2.dart';
+import 'package:movieapp/data/models/main_model.dart';
 import 'package:movieapp/presentation/screen/details_screen.dart';
 import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';
 
 class MovieItem extends StatelessWidget {
-  final Results1 model;
+  final Results model;
   const MovieItem({super.key, required this.model});
 
   @override
@@ -24,21 +25,30 @@ class MovieItem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              height: 230,
-              width: 170,
-              decoration: BoxDecoration(
+        
+            CachedNetworkImage(
+              imageUrl: "https://image.tmdb.org/t/p/w500${model.posterPath}",
+              imageBuilder: (context, imageProvider) => Container(
+                height: 230,
+                width: 170,
+                decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(2.0),
                   image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: NetworkImage(
-                          "https://image.tmdb.org/t/p/w500${model.posterPath}"))),
+                    image: imageProvider,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              placeholder: (context, url) => const SizedBox(
+                  height: 230,
+                  child: Center(child: CircularProgressIndicator())),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
             const SizedBox(
               height: 6.0,
             ),
             SizedBox(
-              width: 180,
+              width: MediaQuery.of(context).size.width / 2,
               child: Text(
                 model.title!,
                 maxLines: 2,
@@ -54,7 +64,7 @@ class MovieItem extends StatelessWidget {
               height: 6.0,
             ),
             SizedBox(
-              width: 170,
+              width: MediaQuery.of(context).size.width / 2,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [

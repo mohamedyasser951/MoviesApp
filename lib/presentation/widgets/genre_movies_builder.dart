@@ -20,7 +20,7 @@ class GenreMoviesBuilder extends StatelessWidget {
           return const Center(
             child: Text("Something went Wrong !!"),
           );
-        } else if (cubit.moviedata.isNotEmpty) {
+        } else if (state is GetMovieByGenereIdSuccessState || cubit.moviedata.isNotEmpty) {
           return SizedBox(
             height: 300,
             child: ListView.builder(
