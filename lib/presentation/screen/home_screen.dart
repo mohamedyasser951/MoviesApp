@@ -6,11 +6,11 @@ import 'package:movieapp/businessLogic/HomeCubit/home_states.dart';
 import 'package:movieapp/businessLogic/SearchCubit/search_cubit.dart';
 import 'package:movieapp/component/styles/style.dart';
 import 'package:movieapp/presentation/screen/search_screen.dart';
-import 'package:movieapp/presentation/widgets/genre_movies_builder.dart';
+import 'package:movieapp/presentation/widgets/genre_builder.dart';
 import 'package:movieapp/presentation/widgets/horizontal_genre.dart';
-import 'package:movieapp/presentation/widgets/now_playing_movie.dart';
-import 'package:movieapp/presentation/widgets/top_person_rate.dart';
-import 'package:movieapp/presentation/widgets/top_rated_movie_builder.dart';
+import 'package:movieapp/presentation/widgets/now_playing.dart';
+import 'package:movieapp/presentation/widgets/top_person.dart';
+import 'package:movieapp/presentation/widgets/top_movie.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -24,7 +24,6 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     MovieCubit.get(context).getGenre();
     MovieCubit.get(context).getMovieByGenreId(movieId: 10751);
-
     super.initState();
   }
 

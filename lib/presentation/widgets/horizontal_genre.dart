@@ -30,7 +30,7 @@ class _HorizontalGenreState extends State<HorizontalGenre> {
           );
         } else if (cubit.genereModel != null) {
           return SizedBox(
-            height: 45,
+            height: 40,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: cubit.genereModel!.genres!.length,
@@ -46,12 +46,12 @@ class _HorizontalGenreState extends State<HorizontalGenre> {
                   
                   child: Container(
                     margin: const EdgeInsets.only(right: 10.0),
-                    padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 0),
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     // width: 100,
                     decoration: BoxDecoration(
                       color: isSelected == index
                           ? CustomColors.secondaryColor
-                          : Colors.grey,
+                          : CustomColors.scaffoldDarkBack,
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Center(
