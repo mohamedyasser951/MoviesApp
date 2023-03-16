@@ -1,5 +1,5 @@
 import 'package:movieapp/data/models/casts_model.dart';
-import 'package:movieapp/data/models/main_model.dart';
+import 'package:movieapp/data/models/movie_model.dart';
 
 class MovieDetailModel {
   bool? adult;

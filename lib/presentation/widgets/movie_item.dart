@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movieapp/component/styles/style.dart';
-import 'package:movieapp/data/models/main_model.dart';
+import 'package:movieapp/data/models/movie_model.dart';
 import 'package:movieapp/presentation/screen/details_screen.dart';
 import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';
 
@@ -40,8 +40,12 @@ class MovieItem extends StatelessWidget {
               ),
               placeholder: (context, url) => const SizedBox(
                   height: 230,
-                  child: Center(child: CircularProgressIndicator())),
-              errorWidget: (context, url, error) => const Icon(Icons.error),
+                  width: 150,
+                  child: Align(
+                      alignment: Alignment.center,
+                      child: CircularProgressIndicator())),
+              errorWidget: (context, url, error) => const SizedBox(
+                  height: 230, child: Center(child: Icon(Icons.error))),
             ),
             const SizedBox(
               height: 6.0,
@@ -68,7 +72,8 @@ class MovieItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    double.parse((model.voteAverage).toStringAsFixed(1)).toString(),
+                    double.parse((model.voteAverage).toStringAsFixed(1))
+                        .toString(),
                     maxLines: 2,
                   ),
                   const SizedBox(

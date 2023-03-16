@@ -3,7 +3,7 @@ import 'package:movieapp/businessLogic/DetailCubit/details_states.dart';
 import 'package:movieapp/data/apiservice/diohelper.dart';
 import 'package:movieapp/data/models/casts_model.dart';
 import 'package:movieapp/data/models/movie_detail_model.dart';
-import 'package:movieapp/data/models/main_model.dart';
+import 'package:movieapp/data/models/movie_model.dart';
 
 class DetailCubit extends Cubit<DetailStates> {
   DetailCubit() : super(IntialDetailState());

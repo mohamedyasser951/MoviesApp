@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/businessLogic/HomeCubit/home_states.dart';
 import 'package:movieapp/data/apiservice/diohelper.dart';
 import 'package:movieapp/data/apiservice/endpoints.dart';
-import 'package:movieapp/data/models/main_model.dart';
-import 'package:movieapp/data/models/tranding_person_model.dart';
+import 'package:movieapp/data/models/movie_model.dart';
+import 'package:movieapp/data/models/persons_model.dart';
 import 'package:movieapp/data/models/genere_model.dart';
 
 class MovieCubit extends Cubit<MovieStates> {
@@ -65,8 +65,6 @@ class MovieCubit extends Cubit<MovieStates> {
     await ApiService.getData(
       url: GENERE,
     ).then((value) {
-      // print(value.data);
-
       genereModel = GenreModel.fromJson(value.data);
       emit(GetGenereSuccessState());
     }).catchError((e) {
@@ -92,20 +90,5 @@ class MovieCubit extends Cubit<MovieStates> {
       emit(GetMovieByGenereIdErrorState());
     });
   }
-  // late MainModel movieByGenres;
-  // getMovieByGenreId({required int movieId}) async {
-  //   emit(GetMovieByGenereIdLoadingState());
-  //   try {
-  //     var response =
-  //         await ApiService.getData(url: "$MOVIEBYGENREID?with_genres=$movieId");
-  //     movieByGenres = MainModel.fromJson(response.data["results"]);
-  //     print(response.data);
-  //     //  emit(GetMovieByGenereIdSuccessState(model: mainModel));
 
-  //     return mainModel;
-  //   } catch (e) {
-  //     print(e.toString());
-  //     emit(GetMovieByGenereIdErrorState());
-  //   }
-  // }
 }

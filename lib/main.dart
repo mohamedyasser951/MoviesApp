@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/businessLogic/HomeCubit/home_cubit.dart';
 import 'package:movieapp/businessLogic/HomeCubit/home_states.dart';
-import 'package:movieapp/businessLogic/SearchCubit/search_cubit.dart';
 import 'package:movieapp/data/apiservice/diohelper.dart';
 import 'package:movieapp/component/block_observer.dart';
 import 'package:movieapp/presentation/screen/home_screen.dart';

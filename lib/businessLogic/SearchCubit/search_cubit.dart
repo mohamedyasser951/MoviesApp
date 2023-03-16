@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/businessLogic/SearchCubit/search_state.dart';
 import 'package:movieapp/data/apiservice/diohelper.dart';
-import 'package:movieapp/data/models/main_model.dart';
+import 'package:movieapp/data/models/movie_model.dart';
 
 class SearchCubit extends Cubit<SearchStates> {
   SearchCubit() : super(IntialSearchState());

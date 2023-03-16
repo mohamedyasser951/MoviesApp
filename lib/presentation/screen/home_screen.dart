@@ -51,9 +51,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   IconButton(
                       onPressed: () async {
                         Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) =>  BlocProvider(
+                          builder: (context) => BlocProvider(
                             create: (context) => SearchCubit(),
-                            child: SearchScreen(),
+                            child: const SearchScreen(),
                           ),
                         ));
                       },

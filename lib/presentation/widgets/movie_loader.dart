@@ -50,7 +50,7 @@ Widget circleLoadingWidget(BuildContext context) {
     highlightColor: Colors.white54,
     enabled: true,
     child: Container(
-      height: 140.0,
+      height: 100.0,
       padding: const EdgeInsets.only(left: 10.0),
       child: ListView.builder(
         shrinkWrap: true,

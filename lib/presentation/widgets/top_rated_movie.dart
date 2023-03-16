@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movieapp/businessLogic/HomeCubit/home_cubit.dart';
-import 'package:movieapp/data/models/main_model.dart';
+import 'package:movieapp/data/models/movie_model.dart';
 import 'package:movieapp/presentation/widgets/movie_item.dart';
 import 'package:movieapp/presentation/widgets/movie_loader.dart';
 

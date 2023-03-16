@@ -122,8 +122,13 @@ class DetailsScreen extends StatelessWidget {
                       child: Text("CASTS"),
                     ),
                     CastsBuilder(model: cubit.movieDetailModel.castModel!),
+                    
                     const SizedBox(
                       height: 6,
+                    ),
+                       const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text("Related Movies"),
                     ),
                     const SimilarMovieBuilder(),
                   ])),

@@ -1,5 +1,5 @@
-import 'package:movieapp/data/models/main_model.dart';
-import 'package:movieapp/data/models/tranding_person_model.dart';
+import 'package:movieapp/data/models/movie_model.dart';
+import 'package:movieapp/data/models/persons_model.dart';
 
 abstract class MovieStates {}
 

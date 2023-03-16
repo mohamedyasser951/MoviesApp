@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movieapp/data/models/main_model.dart';
+import 'package:movieapp/data/models/movie_model.dart';
 
 @immutable
 class SearchStates {}

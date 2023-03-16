@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:movieapp/businessLogic/HomeCubit/home_cubit.dart';
 import 'package:movieapp/component/styles/style.dart';
-import 'package:movieapp/data/models/main_model.dart';
+import 'package:movieapp/data/models/movie_model.dart';
 import 'package:movieapp/presentation/screen/details_screen.dart';
 import 'package:movieapp/presentation/widgets/movie_loader.dart';
 import 'package:page_indicator/page_indicator.dart';
@@ -101,13 +101,8 @@ class _NowPlayingState extends State<NowPlaying> {
           );
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return  Center(
+          return Center(
             child: buildMovielistLoaderWidget(context),
-          );
-        }
-        if (snapshot.connectionState == ConnectionState.none) {
-          return const Center(
-            child: Text("Connection state none"),
           );
         }
         return const Text("Something error!");
